@@ -1,0 +1,222 @@
+:root {
+  --anim-time: 12s;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #F7F6F3;
+  color: #1A1A1A;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Hero electricity canvas ── */
+.animate-lightning-1 {
+  animation: lightning-strike var(--anim-time) infinite ease-out;
+}
+
+.animate-lightning-2 {
+  animation: lightning-strike var(--anim-time) infinite ease-out;
+  animation-delay: 2.5s; 
+}
+
+.animate-lightning-3 {
+  animation: lightning-strike var(--anim-time) infinite ease-out;
+  animation-delay: 6s; 
+}
+
+@keyframes lightning-strike {
+  0%, 66% {
+    opacity: 0; /* Przez pierwsze 66% czasu (ok. 4 sekundy) cisza przed burzą */
+  }
+  67% {
+    opacity: 1; /* Gwałtowne uderzenie (pełna moc w ułamku sekundy) */
+  }
+  68% {
+    opacity: 0.2; /* Szybkie przygaśnięcie... */
+  }
+  69% {
+    opacity: 1; /* ...i ponowny, tzw. wtórny błysk (efekt migotania pioruna) */
+  }
+  70% {
+    opacity: 1; /* Chwila maksymalnego rozżarzenia */
+  }
+  100% {
+    opacity: 0; /* Przez pozostały czas (od 70% do 100%) płynne, powolne wygasanie energii */
+  }
+}
+
+/* ── Volt underline link ── */
+.volt-link {
+  position: relative;
+  text-decoration: none;
+}
+.volt-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 2px;
+  background: #D4A900;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+.volt-link:hover::after { transform: scaleX(1); }
+
+/* ── Gallery ── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 240px 240px;
+  gap: 8px;
+}
+.gallery-grid .g1 { grid-column: span 7; grid-row: span 2; }
+.gallery-grid .g2 { grid-column: span 5; }
+.gallery-grid .g3 { grid-column: span 5; }
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 160px;
+  }
+  .gallery-grid .g1 { grid-column: span 2; grid-row: span 1; }
+  .gallery-grid .g2 { grid-column: span 1; }
+  .gallery-grid .g3 { grid-column: span 1; }
+}
+
+.gallery-item {
+  overflow: hidden;
+  background: #D8D5D0;
+  position: relative;
+}
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+  filter: grayscale(20%);
+}
+.gallery-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
+.gallery-item .caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 10px 14px;
+  background: linear-gradient(transparent, rgba(255,255,255,0.85));
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26,26,26,0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gallery-item:hover .caption { opacity: 1; }
+
+/* ── Reviews ── */
+.stars { color: #D4A900; letter-spacing: 2px; }
+
+.review-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.review-track::-webkit-scrollbar { display: none; }
+
+.review-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  background: #EEECEA;
+  border: 1px solid #D8D5D0;
+  padding: 24px;
+}
+
+/* ── Review nav buttons ── */
+.review-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid #CCCAC6;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+  color: #1A1A1A;
+  flex-shrink: 0;
+}
+.review-nav-btn:hover:not(:disabled) {
+  background: #D4A900;
+  border-color: #D4A900;
+  color: #F7F6F3;
+}
+.review-nav-btn:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+/* ── Divider ── */
+.volt-divider {
+  width: 48px; height: 3px;
+  background: #D4A900;
+  margin-bottom: 20px;
+}
+
+/* ── CTA button ── */
+.cta-btn {
+  display: inline-block;
+  background: #D4A900;
+  color: #F7F6F3;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+.cta-btn:hover { background: #1A1A1A; }
+
+/* ── Section label ── */
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #B8900A;
+  margin-bottom: 10px;
+}
+
+/* ── Bolt icon ── */
+.bolt-icon {
+  display: inline-block;
+  width: 32px; height: 32px;
+  background: #D4A900;
+  clip-path: polygon(60% 0%, 30% 48%, 55% 48%, 40% 100%, 70% 52%, 45% 52%);
+}
+
+/* ── Language switcher ── */
+.lang-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.lang-btn.active { color: #B8900A; }
+.lang-btn.inactive { color: #AAAAAA; }
+.lang-btn.inactive:hover { color: #777; }
+.lang-divider {
+  color: #BBBBBB;
+  font-size: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  user-select: none;
+}

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instalacje Winiarczyk · Elektryk</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            volt: '#D4A900',
+            ink:  '#F7F6F3',
+            panel: '#EEECEA',
+            card:  '#E5E3DF',
+            bone:  '#1A1A1A',
+            muted: '#666666',
+          },
+          fontFamily: {
+            display: ['"Barlow Condensed"', 'sans-serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-black/8" style="background:rgba(247,246,243,0.94);backdrop-filter:blur(12px)">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-2">
+      <span class="bolt-icon" style="width:20px;height:20px"></span>
+      <span class="font-display font-700 text-bone tracking-widest uppercase text-sm">Instalacje Winiarczyk</span>
+    </div>
+
+    <!-- Desktop: nav links + lang switcher -->
+    <div class="hidden md:flex items-center gap-8 text-sm text-muted font-body">
+      <a href="#about"   class="volt-link hover:text-bone transition-colors" data-i18n="nav_about">O nas</a>
+      <a href="#gallery" class="volt-link hover:text-bone transition-colors" data-i18n="nav_work">Realizacje</a>
+      <a href="#reviews" class="volt-link hover:text-bone transition-colors" data-i18n="nav_reviews">Opinie</a>
+      <a href="#contact" class="volt-link hover:text-bone transition-colors" data-i18n="nav_contact">Kontakt</a>
+
+      <!-- Language switcher -->
+      <div class="flex items-center gap-1.5 ml-2">
+        <button class="lang-btn active" data-lang="pl">PL</button>
+        <span class="lang-divider">|</span>
+        <button class="lang-btn inactive" data-lang="en">EN</button>
+      </div>
+    </div>
+
+    <!-- Mobile right: lang switcher + hamburger -->
+    <div class="md:hidden flex items-center gap-3">
+      <div class="flex items-center gap-1">
+        <button class="lang-btn active" data-lang="pl">PL</button>
+        <span class="lang-divider">|</span>
+        <button class="lang-btn inactive" data-lang="en">EN</button>
+      </div>
+      <button
+        id="nav-toggle"
+        class="flex flex-col justify-center items-center gap-1.5 w-10 h-10 -mr-2"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span class="ham-bar block w-6 h-0.5 bg-bone transition-all duration-300 origin-center"></span>
+        <span class="ham-bar block w-6 h-0.5 bg-bone transition-all duration-300"></span>
+        <span class="ham-bar block w-6 h-0.5 bg-bone transition-all duration-300 origin-center"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile dropdown -->
+  <div
+    id="mobile-menu"
+    class="md:hidden overflow-hidden transition-all duration-300 ease-in-out"
+    style="max-height:0"
+  >
+    <div class="border-t border-black/8 px-6 py-4 flex flex-col gap-0 font-display font-600 uppercase tracking-widest text-sm">
+      <a href="#about"   class="mobile-nav-link py-4 border-b border-black/8 text-muted hover:text-volt transition-colors" data-i18n="nav_about">O nas</a>
+      <a href="#gallery" class="mobile-nav-link py-4 border-b border-black/8 text-muted hover:text-volt transition-colors" data-i18n="nav_work">Realizacje</a>
+      <a href="#reviews" class="mobile-nav-link py-4 border-b border-black/8 text-muted hover:text-volt transition-colors" data-i18n="nav_reviews">Opinie</a>
+      <a href="#contact" class="mobile-nav-link py-4 text-muted hover:text-volt transition-colors" data-i18n="nav_contact">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-14  bg-[radial-gradient(circle_at_center,_rgba(212,169,0,0)_10%,_rgba(212,169,0,0.03)_80%)]">
+
+  <div class="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
+    
+    <img src="bolts1-sm.svg" alt="" class="absolute top-0 left-0 w-full h-full object-cover object-center opacity-0 animate-lightning-1 md:hidden" />
+    <img src="bolts1-md.svg" alt="" class="absolute top-0 left-0 w-full h-full object-cover object-center opacity-0 animate-lightning-1 hidden md:block" />
+
+    <img src="bolts2-sm.svg" alt="" class="absolute top-0 left-0 w-full h-full object-cover object-center opacity-0 animate-lightning-2 md:hidden" />
+    <img src="bolts2-md.svg" alt="" class="absolute top-0 left-0 w-full h-full object-cover object-center opacity-0 animate-lightning-2 hidden md:block" />
+
+    <img src="bolts3-sm.svg" alt="" class="absolute top-0 left-0 w-full h-full object-cover object-center opacity-0 animate-lightning-3 md:hidden" />
+    <img src="bolts3-md.svg" alt="" class="absolute top-0 left-0 w-full h-full object-cover object-center opacity-0 animate-lightning-3 hidden md:block" />
+
+  </div>
+
+  <div class="relative sm:max-w-6xl md:max-w-none md:flex md:flex-row mx-auto px-6 py-24 md:gap-8 lg:gap-12">
+    
+    <div>
+      <p class="section-label mb-6" data-i18n="hero_label">Elektryk · Poznań i okolice</p>
+
+      <h1 class="font-display font-black text-bone leading-none mb-6" style="font-size:clamp(52px,10vw,120px);letter-spacing:-0.01em">
+        Instalacje<br/>
+        <span style="color:#D4A900">Winiarczyk</span>
+      </h1>
+    </div>
+
+    <div>
+      <p class="font-body text-muted max-w-lg text-lg leading-relaxed mb-10" data-i18n="hero_desc">
+        Instalacje elektryczne dla domu i firm — kompleksowe okablowanie, szukanie usterek i inteligentne instalacje. Żadna praca nie jest zbyt mała. Solidna robota. Uczciwa cena.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="#contact" class="cta-btn" data-i18n="hero_cta">Bezpłatna wycena</a>
+        <a href="#gallery" class="inline-flex items-center gap-2 text-bone font-display font-600 uppercase tracking-widest text-sm hover:text-volt transition-colors" style="letter-spacing:0.18em">
+          <span data-i18n="hero_cta2">Zobacz realizacje</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="flex flex-wrap gap-6 mt-16 text-sm text-muted font-display font-600 uppercase tracking-widest">
+        <div class="flex items-center gap-2">
+          <span style="color:#D4A900">✓</span> <span data-i18n="badge1">15+ lat doświadczenia</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span style="color:#D4A900">✓</span> <span data-i18n="badge2">W pełni ubezpieczony</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span style="color:#D4A900">✓</span> <span data-i18n="badge3">Ocena 5 gwiazdek</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style="background:linear-gradient(transparent,#F7F6F3)"></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════ -->
+<section id="about" class="max-w-6xl mx-auto px-6 py-24">
+  <div class="grid md:grid-cols-2 gap-16 items-start">
+
+    <div>
+      <p class="section-label" data-i18n="about_label">O nas</p>
+      <div class="volt-divider"></div>
+      <h2 class="font-display font-black text-bone text-4xl md:text-5xl leading-tight mb-6" data-i18n="about_heading">
+        Precyzyjna robota.<br/>Bez bałaganu. Bez zgadywania.
+      </h2>
+      <div class="space-y-4 text-muted leading-relaxed">
+        <p data-i18n="about_p1">
+          Pracuję jako elektryk od ponad 15 lat — od kompleksowego okablowania starych bloków po montaż ładowarek do samochodów elektrycznych i inteligentne oświetlenie w nowoczesnych domach.
+        </p>
+        <p data-i18n="about_p2">
+          Każda praca jest wyceniana transparentnie, zanim zacznę. Przyjeżdżam punktualnie, sprzątam po sobie i nie idę na skróty — bo błędy w instalacji elektrycznej wychodzą w najgorszym możliwym momencie.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-label" data-i18n="services_label">Usługi</p>
+      <div class="volt-divider"></div>
+      <ul class="space-y-0 divide-y divide-black/8 font-display font-600 text-lg uppercase tracking-wide">
+        <li class="py-4 flex items-center justify-between group cursor-default">
+          <span class="text-bone group-hover:text-volt transition-colors" data-i18n="svc1">Okablowanie mieszkań i domów</span>
+          <span class="text-volt opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+        </li>
+        <li class="py-4 flex items-center justify-between group cursor-default">
+          <span class="text-bone group-hover:text-volt transition-colors" data-i18n="svc2">Wymiana rozdzielnicy</span>
+          <span class="text-volt opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+        </li>
+        <li class="py-4 flex items-center justify-between group cursor-default">
+          <span class="text-bone group-hover:text-volt transition-colors" data-i18n="svc3">Szukanie i naprawa usterek</span>
+          <span class="text-volt opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+        </li>
+        <li class="py-4 flex items-center justify-between group cursor-default">
+          <span class="text-bone group-hover:text-volt transition-colors" data-i18n="svc4">Montaż ładowarek EV</span>
+          <span class="text-volt opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+        </li>
+        <li class="py-4 flex items-center justify-between group cursor-default">
+          <span class="text-bone group-hover:text-volt transition-colors" data-i18n="svc5">Inteligentny dom i oświetlenie</span>
+          <span class="text-volt opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+        </li>
+        <li class="py-4 flex items-center justify-between group cursor-default">
+          <span class="text-bone group-hover:text-volt transition-colors" data-i18n="svc6">Instalacje komercyjne</span>
+          <span class="text-volt opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     GALLERY
+═══════════════════════════════════════ -->
+<section id="gallery" class="max-w-6xl mx-auto px-6 pb-24">
+  <p class="section-label" data-i18n="gallery_label">Realizacje</p>
+  <div class="volt-divider"></div>
+  <h2 class="font-display font-black text-bone text-4xl md:text-5xl leading-tight mb-10" data-i18n="gallery_heading">
+    Ostatnie zlecenia
+  </h2>
+
+  <div class="gallery-grid">
+    <div class="gallery-item g1">
+      <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=900&q=80" alt="Fuse board installation" loading="lazy" />
+      <div class="caption" data-i18n="cap1">Wymiana rozdzielnicy · Blok, Poznań</div>
+    </div>
+    <div class="gallery-item g2">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Electrical conduit work" loading="lazy" />
+      <div class="caption" data-i18n="cap2">Prowadzenie kabli · Nowe budownictwo</div>
+    </div>
+    <div class="gallery-item g3">
+      <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&q=80" alt="Smart home wiring" loading="lazy" />
+      <div class="caption" data-i18n="cap3">Inteligentne oświetlenie · Willa prywatna</div>
+    </div>
+  </div>
+
+  <p class="text-muted text-sm mt-4 font-body" data-i18n="gallery_note">
+    Zamień powyższe zdjęcia na własne — patrz komentarz w kodzie HTML.
+  </p>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     REVIEWS
+═══════════════════════════════════════ -->
+<section id="reviews" class="py-24" style="background:#EEECEA">
+  <div class="max-w-6xl mx-auto px-6">
+     <!-- Header row: title left, nav buttons right -->
+    <div class="flex items-end justify-between gap-4 mb-2">
+      <div>
+        <p class="section-label" data-i18n="reviews_label">Opinie</p>
+        <div class="volt-divider"></div>
+        <h2 class="font-display font-black text-bone text-4xl md:text-5xl leading-tight" data-i18n="reviews_heading">
+          Co mówią klienci
+        </h2>
+      </div>
+      <!-- Prev / Next buttons -->
+      <div class="flex items-center gap-2 pb-1 shrink-0">
+        <button id="review-prev" class="review-nav-btn" aria-label="Previous" disabled>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button id="review-next" class="review-nav-btn" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <p class="text-muted mb-10 text-sm">
+      <span data-i18n="reviews_sub">Opinie z Google</span> ·
+      <a href="https://maps.google.com" target="_blank" class="volt-link text-volt hover:text-bone transition-colors" data-i18n="reviews_link">Zobacz wszystkie na Google</a>
+    </p>
+
+    <div id="review-track" class="review-track">
+      <div class="review-card">
+        <div class="stars text-base mb-3">★★★★★</div>
+        <p class="text-bone text-sm leading-relaxed mb-4" data-i18n="rev1">
+          „Zleciłem wymianę instalacji elektrycznej i wszystko poszło bardzo sprawnie. Robota wykonana szybko, solidnie i bez żadnych problemów. Na każdym etapie był dobry kontakt, wszystko zostało jasno wytłumaczone, a po skończonej pracy został porządek. Widać doświadczenie i profesjonalne podejście. Z czystym sumieniem polecam."
+        </p>
+        <p class="text-muted text-xs font-display font-600 uppercase tracking-widest">Igor S. · Google</p>
+      </div>
+      <div class="review-card">
+        <div class="stars text-base mb-3">★★★★★</div>
+        <p class="text-bone text-sm leading-relaxed mb-4" data-i18n="rev2">
+          „Fachowo, solidnie, dokładnie i w dobrych cenach. Czego chcieć więcej od specjalisty? Polecam i pozdrawiam"
+        </p>
+        <p class="text-muted text-xs font-display font-600 uppercase tracking-widest">neonimos · Google</p>
+      </div>
+      <div class="review-card">
+        <div class="stars text-base mb-3">★★★★★</div>
+        <p class="text-bone text-sm leading-relaxed mb-4" data-i18n="rev3">
+          „Dziękuję bardzo za zrobienie protokołu elektrycznego w lokalu gastronomicznym 🙏🙋‍♂️ good job polecam szybko sprawnie i w dobrej cenie …"
+        </p>
+        <p class="text-muted text-xs font-display font-600 uppercase tracking-widest">Filip R. · Google</p>
+      </div>
+      <div class="review-card">
+        <div class="stars text-base mb-3">★★★★★</div>
+        <p class="text-bone text-sm leading-relaxed mb-4" data-i18n="rev4">
+          „Serdecznie polecam usługi elektryczne świadczone przez Pana Daniela. Prace zostały wykonane profesjonalnie, terminowo i z dużą dbałością o szczegóły. Elektryk wykazał się wysoką wiedzą techniczną. Wszystkie prace zostały przeprowadzone zgodnie z obowiązującymi normami bezpieczeństwa. Dodatkowo na uwagę zasługuje bardzo dobry kontakt a także uczciwe podejście do wyceny! ...No i cierpliwość, cierpliwość to Jego drugie imię 😁. Zdecydowanie polecam każdemu, kto szuka sprawdzonego i solidnego elektryka."
+        </p>
+        <p class="text-muted text-xs font-display font-600 uppercase tracking-widest">Hanna T-S. · Google</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     CONTACT FORM
+═══════════════════════════════════════ -->
+<section id="contact" class="max-w-6xl mx-auto px-6 py-24">
+  <div class="grid md:grid-cols-2 gap-16 items-start">
+
+    <div>
+      <p class="section-label" id="contact-form-label">Kontakt</p>
+      <div class="volt-divider"></div>
+      <h2 class="font-display font-black text-bone text-4xl md:text-5xl leading-tight mb-4" id="contact-form-heading">
+        Napisz do nas
+      </h2>
+      <p class="text-muted leading-relaxed mb-8" id="contact-form-sub">
+        Opisz swoją sprawę, a odpiszę tak szybko jak to możliwe. Możesz też zadzwonić lub napisać maila bezpośrednio.
+      </p>
+      <ul class="space-y-4 text-sm">
+        <li>
+          <a href="tel:+48733346243" class="flex items-center gap-3 text-bone hover:text-volt transition-colors">
+            <svg class="text-volt shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 3a1 1 0 011-1h2.5a1 1 0 01.97.757l.5 2a1 1 0 01-.28.979L5.5 6.5c.9 1.8 2.2 3.1 4 4l.764-1.19a1 1 0 01.98-.28l2 .5A1 1 0 0114 10.5V13a1 1 0 01-1 1C5.82 14 2 10.18 2 5V3z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            +48 733 346 243
+          </a>
+        </li>
+        <li>
+          <a href="mailto:kontakt@example.com" class="flex items-center gap-3 text-bone hover:text-volt transition-colors">
+            <svg class="text-volt shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M1 5l7 5 7-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            kontakt@example.com
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <!-- Contact Form -->
+      <div id="contact-form-wrap">
+        <div class="space-y-4">
+          <div>
+            <label class="block font-display font-600 uppercase tracking-widest text-xs text-muted mb-1.5" id="label-name" for="cf-name">Imię i nazwisko</label>
+            <input
+              id="cf-name"
+              type="text"
+              placeholder="Jan Kowalski"
+              class="w-full bg-white border border-black/12 px-4 py-3 text-bone font-body text-sm placeholder:text-muted/50 focus:outline-none focus:border-volt transition-colors"
+            />
+          </div>
+          <div>
+            <label class="block font-display font-600 uppercase tracking-widest text-xs text-muted mb-1.5" id="label-email" for="cf-email">Adres e-mail</label>
+            <input
+              id="cf-email"
+              type="email"
+              placeholder="jan@example.com"
+              class="w-full bg-white border border-black/12 px-4 py-3 text-bone font-body text-sm placeholder:text-muted/50 focus:outline-none focus:border-volt transition-colors"
+            />
+          </div>
+          <div>
+            <label class="block font-display font-600 uppercase tracking-widest text-xs text-muted mb-1.5" id="label-phone" for="cf-phone">Telefon <span class="normal-case tracking-normal font-body font-400 text-muted/60">(opcjonalnie)</span></label>
+            <input
+              id="cf-phone"
+              type="tel"
+              placeholder="+48 000 000 000"
+              class="w-full bg-white border border-black/12 px-4 py-3 text-bone font-body text-sm placeholder:text-muted/50 focus:outline-none focus:border-volt transition-colors"
+            />
+          </div>
+          <div>
+            <label class="block font-display font-600 uppercase tracking-widest text-xs text-muted mb-1.5" id="label-msg" for="cf-msg">Wiadomość</label>
+            <textarea
+              id="cf-msg"
+              rows="5"
+              placeholder="Opisz czego potrzebujesz…"
+              class="w-full bg-white border border-black/12 px-4 py-3 text-bone font-body text-sm placeholder:text-muted/50 focus:outline-none focus:border-volt transition-colors resize-none"
+            ></textarea>
+          </div>
+          <div class="flex items-center justify-between gap-4 pt-1">
+            <p id="cf-error" class="text-sm font-body hidden" style="color:#c0392b"></p>
+            <button
+              id="cf-submit"
+              onclick="handleContactSubmit()"
+              class="cta-btn ml-auto"
+              id="label-send"
+            >Wyślij wiadomość</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success state -->
+      <div id="contact-success" class="hidden py-12 text-center">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full mb-4" style="background:#D4A900">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M5 13l4 4L19 7" stroke="#F7F6F3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-black text-bone text-2xl uppercase tracking-wide mb-2" id="success-title">Wiadomość wysłana!</h3>
+        <p class="text-muted text-sm" id="success-sub">Odezwę się tak szybko jak to możliwe.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT FOOTER
+═══════════════════════════════════════ -->
+<footer style="background:#E5E3DF;border-top:1px solid #CCCAC6">
+  <div class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-12">
+
+    <div>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="bolt-icon" style="width:24px;height:24px"></span>
+        <span class="font-display font-900 text-bone text-xl tracking-widest uppercase">Instalacje Winiarczyk</span>
+      </div>
+      <p class="text-muted text-sm leading-relaxed" data-i18n="footer_desc">
+        Licencjonowany elektryk.<br/>
+        Obsługuję Poznań i okolice.
+      </p>
+    </div>
+
+    <div>
+      <p class="section-label mb-4" data-i18n="footer_contact_label">Kontakt</p>
+      <ul class="space-y-3 text-sm">
+        <li>
+          <a href="tel:+48733346243" class="flex items-center gap-3 text-bone hover:text-volt transition-colors group">
+            <svg class="text-volt shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 3a1 1 0 011-1h2.5a1 1 0 01.97.757l.5 2a1 1 0 01-.28.979L5.5 6.5c.9 1.8 2.2 3.1 4 4l.764-1.19a1 1 0 01.98-.28l2 .5A1 1 0 0114 10.5V13a1 1 0 01-1 1C5.82 14 2 10.18 2 5V3z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            +48 733 346 243
+          </a>
+        </li>
+        <li>
+          <a href="mailto:kontakt@example.com" class="flex items-center gap-3 text-bone hover:text-volt transition-colors group">
+            <svg class="text-volt shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M1 5l7 5 7-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            kontakt@example.com
+          </a>
+        </li>
+        <li class="flex items-start gap-3 text-muted">
+          <svg class="text-volt shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 1.5C5.51 1.5 3.5 3.51 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.49-2.01-4.5-4.5-4.5z"
+                  stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            <circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.4"/>
+          </svg>
+          <span data-i18n="footer_location">Poznań i okolice</span>
+        </li>
+        <li class="flex items-start gap-3 text-muted">
+          <svg class="text-volt shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="2" width="10" height="12" rx="1"
+                  stroke="currentColor"
+                  stroke-width="1.4"/>
+
+            <path d="M6 5H7M9 5H10
+                    M6 8H7M9 8H10
+                    M6 11H7M9 11H10"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"/>
+
+            <path d="M7.5 14V11.5H8.5V14"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"/>
+          </svg>
+          <span>NIP: 4445851967</span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="section-label mb-4" data-i18n="footer_hours_label">Godziny pracy</p>
+      <ul class="space-y-2 text-sm text-muted font-body">
+        <li class="flex justify-between"><span data-i18n="hours_mf">Pon – Sob</span><span class="text-bone">8:00 – 19:00</span></li>
+        <li class="flex justify-between"><span data-i18n="hours_sun">Niedziela</span><span class="text-muted" data-i18n="hours_closed">Nieczynne</span></li>
+      </ul>
+      <p class="text-muted text-xs mt-4" data-i18n="hours_emergency">Awarie: dostępny całą dobę.</p>
+    </div>
+
+  </div>
+
+  <div class="border-t border-black/8">
+    <div class="max-w-6xl mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
+      <span data-i18n="footer_copy">© 2025 Instalacje Winiarczyk. Wszystkie prawa zastrzeżone.</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script src="translations.js"></script>
+<script src="review-carousel.js"></script>
+<script src="contact-form.js"></script>
+</body>
+</html>
