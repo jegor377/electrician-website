@@ -1,5 +1,5 @@
 :root {
-  --anim-time: 12s;
+  --anim-time: 10s;
 }
 
 html { scroll-behavior: smooth; }
@@ -26,23 +26,23 @@ body {
 }
 
 @keyframes lightning-strike {
-  0%, 66% {
-    opacity: 0; /* Przez pierwsze 66% czasu (ok. 4 sekundy) cisza przed burzą */
+  0%, 10% {
+    opacity: 0;
   }
-  67% {
-    opacity: 1; /* Gwałtowne uderzenie (pełna moc w ułamku sekundy) */
+  11% {
+    opacity: 1;
   }
-  68% {
-    opacity: 0.2; /* Szybkie przygaśnięcie... */
+  11.5% {
+    opacity: 0;
   }
-  69% {
-    opacity: 1; /* ...i ponowny, tzw. wtórny błysk (efekt migotania pioruna) */
+  12% {
+    opacity: 1;
   }
-  70% {
-    opacity: 1; /* Chwila maksymalnego rozżarzenia */
+  13% {
+    opacity: 1;
   }
-  100% {
-    opacity: 0; /* Przez pozostały czas (od 70% do 100%) płynne, powolne wygasanie energii */
+  20% {
+    opacity: 0;
   }
 }
 
