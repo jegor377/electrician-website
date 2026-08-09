@@ -57,14 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('gallery-toggle');
   if (!wrap || !toggleBtn) return;
 
-  const labels = {
-    more: toggleBtn.textContent.trim(),
-    less: 'Pokaż mniej'
-  };
-
   toggleBtn.addEventListener('click', () => {
     const collapsed = wrap.classList.toggle('collapsed');
-    toggleBtn.textContent = collapsed ? labels.more : labels.less;
+    const showMoreText = document.getElementById('show_more_text');
+    const showLessText = document.getElementById('show_less_text');
+    if(collapsed) {
+        showMoreText.style.display = 'block';
+        showLessText.style.display = 'none';
+    } else {
+        showMoreText.style.display = 'none';
+        showLessText.style.display = 'block';
+    }
 
     if (!collapsed) {
       // scroll so the newly revealed images are visible

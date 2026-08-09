@@ -350,3 +350,7 @@ body {
   border-color: #D4A900;
   color: #F7F6F3;
 }
+
+#show_less_text {
+  display: none;
+}

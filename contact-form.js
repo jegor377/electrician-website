@@ -5,6 +5,7 @@ function handleContactSubmit() {
   const phone   = document.getElementById('cf-phone').value.trim();
   const msg     = document.getElementById('cf-msg').value.trim();
   const errEl   = document.getElementById('cf-error');
+  const targetEmailAddress = 'dwiniarczyk2@gmail.com';
 
   // Simple validation
   if (!name) { showError(errEl, currentContactLang === 'en' ? 'Please enter your name.' : 'Proszę podać imię i nazwisko.'); return; }
@@ -25,7 +26,7 @@ function handleContactSubmit() {
     (phone ? (currentContactLang === 'en' ? 'Phone: ' : 'Telefon: ') + phone + '\n' : '') +
     '\n' + msg
   );
-  window.location.href = 'mailto:kontakt@example.com?subject=' + subject + '&body=' + body;
+  window.location.href = `mailto:${targetEmailAddress}?subject=` + subject + '&body=' + body;
 
   // Show success after short delay
   setTimeout(function() {
