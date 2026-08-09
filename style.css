@@ -67,27 +67,43 @@ body {
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 240px 240px;
+  grid-auto-rows: 240px;
+  grid-auto-flow: row dense;
   gap: 8px;
 }
-.gallery-grid .g1 { grid-column: span 7; grid-row: span 2; }
-.gallery-grid .g2 { grid-column: span 5; }
-.gallery-grid .g3 { grid-column: span 5; }
+
+/* wzorzec powtarzalny co 6 elementów:
+   1-3: duży kafelek po LEWEJ
+   4-6: duży kafelek po PRAWEJ (lustrzane odbicie) */
+.gallery-item:nth-child(6n+1) { grid-column: 1 / 8;  grid-row: span 2; } /* duży, lewo */
+.gallery-item:nth-child(6n+2) { grid-column: 8 / 13; }                   /* mały, góra-prawo */
+.gallery-item:nth-child(6n+3) { grid-column: 8 / 13; }                   /* mały, dół-prawo */
+.gallery-item:nth-child(6n+4) { grid-column: 1 / 6;  }                   /* mały, góra-lewo */
+.gallery-item:nth-child(6n+5) { grid-column: 1 / 6;  }                   /* mały, dół-lewo */
+.gallery-item:nth-child(6n)   { grid-column: 6 / 13; grid-row: span 2; } /* duży, prawo */
 
 @media (max-width: 768px) {
   .gallery-grid {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px 160px;
+    grid-auto-rows: 180px;
   }
-  .gallery-grid .g1 { grid-column: span 2; grid-row: span 1; }
-  .gallery-grid .g2 { grid-column: span 1; }
-  .gallery-grid .g3 { grid-column: span 1; }
+  /* na mobile: prosta jednolita siatka 2 kolumny, bez wzorca lewo/prawo */
+  .gallery-item:nth-child(6n+1),
+  .gallery-item:nth-child(6n+2),
+  .gallery-item:nth-child(6n+3),
+  .gallery-item:nth-child(6n+4),
+  .gallery-item:nth-child(6n+5),
+  .gallery-item:nth-child(6n) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
 }
 
 .gallery-item {
   overflow: hidden;
   background: #D8D5D0;
   position: relative;
+  cursor: pointer;
 }
 .gallery-item img {
   width: 100%; height: 100%;
@@ -109,6 +125,13 @@ body {
   transition: opacity 0.3s ease;
 }
 .gallery-item:hover .caption { opacity: 1; }
+
+@media (min-width: 769px) {
+  .gallery-item.gallery-full {
+    grid-column: 1 / 13;
+    grid-row: span 2;
+  }
+}
 
 /* ── Reviews ── */
 .stars { color: #D4A900; letter-spacing: 2px; }
@@ -219,4 +242,111 @@ body {
   font-size: 12px;
   font-family: 'Barlow Condensed', sans-serif;
   user-select: none;
+}
+
+/* ── Lightbox ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26,26,26,0.92);
+  padding: 24px;
+}
+.lightbox.open { display: flex; }
+
+.lightbox-figure {
+  max-width: 90vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lightbox-figure img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.lightbox-figure figcaption {
+  margin-top: 14px;
+  color: #F7F6F3;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.lightbox-btn {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: #F7F6F3;
+  cursor: pointer;
+  transition: color 0.2s, opacity 0.2s;
+  line-height: 1;
+}
+.lightbox-btn:hover { color: #D4A900; }
+
+.lightbox-close { top: 20px; right: 24px; font-size: 28px; }
+.lightbox-prev, .lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  padding: 8px 14px;
+}
+.lightbox-prev { left: 12px; }
+.lightbox-next { right: 12px; }
+
+@media (max-width: 640px) {
+  .lightbox-prev, .lightbox-next { font-size: 34px; }
+}
+
+/* ── Gallery collapse/fade ── */
+.gallery-wrap {
+  position: relative;
+  transition: max-height 0.5s ease;
+}
+
+.gallery-wrap.collapsed {
+  max-height: 550px; /* height of first row-pair (240*2 + 16px gap) */
+  overflow: hidden;
+}
+
+.gallery-wrap.collapsed::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 80px;
+  background: linear-gradient(transparent, #F7F6F3);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .gallery-wrap.collapsed {
+    max-height: 388px; /* 180*2 + 8px gap, matches first 3 mobile tiles */
+  }
+}
+
+.gallery-toggle-btn {
+  display: inline-block;
+  background: transparent;
+  border: 1.5px solid #CCCAC6;
+  color: #1A1A1A;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 12px 32px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.gallery-toggle-btn:hover {
+  background: #D4A900;
+  border-color: #D4A900;
+  color: #F7F6F3;
 }
