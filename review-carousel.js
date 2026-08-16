@@ -27,3 +27,8 @@
   // Initial check (next enabled, prev disabled)
   updateButtons();
 })();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const copyrightDate = document.getElementById('copyright_year')
+  copyrightDate.innerHTML = `${(new Date()).getFullYear()}`
+})
